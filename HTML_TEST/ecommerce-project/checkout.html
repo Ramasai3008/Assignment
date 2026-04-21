@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="checkout.html">Cart</a>
+    <a href="contact.html">Contact</a>
+</div>
+
+<h1>Checkout</h1>
+
+<form>
+    Name: <input type="text" required><br><br>
+    Email: <input type="email" required><br><br>
+    Phone: <input type="text" pattern="[0-9]{10}" required><br><br>
+    Address: <input type="text" required><br><br>
+    City: <input type="text" required><br><br>
+    PIN: <input type="text" pattern="[0-9]{6}" required><br><br>
+
+    Payment:
+    <input type="radio" name="pay">Card
+    <input type="radio" name="pay">UPI
+    <br><br>
+
+    <input type="checkbox" required> Accept Terms
+    <br><br>
+
+    <input type="submit" value="Place Order">
+</form>
+
+</body>
+</html>
