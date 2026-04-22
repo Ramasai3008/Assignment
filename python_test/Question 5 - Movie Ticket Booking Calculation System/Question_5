@@ -1,0 +1,80 @@
+def calculate_ticket_price(seats, timing, is_weekend):
+
+    # 1. Base prices
+    prices = {
+        "VIP": 500,
+        "REGULAR": 300,
+        "ECONOMY": 150
+    }
+
+    # 2. Timing multipliers
+    timing_mult = {
+        "morning": 0.8,
+        "afternoon": 1,
+        "evening": 1.2,
+        "night": 1.5
+    }
+
+    # Filter valid seats
+    valid_seats = [s for s in seats if s in prices]
+
+    if len(valid_seats) == 0:
+        return "No valid booking"
+
+    # Base total
+    base_total = sum([prices[s] for s in valid_seats])
+    print("Base Total:", base_total)
+
+    # Timing adjustment
+    timing_total = base_total * timing_mult.get(timing, 1)
+    print("After Timing:", int(timing_total))
+
+    # Weekend surcharge
+    if is_weekend:
+        weekend_charge = timing_total * 0.10
+        timing_total += weekend_charge
+        print("Weekend Charge:", int(weekend_charge))
+    else:
+        print("No Weekend Charge")
+
+    # Bulk discount
+    discount = 0
+    if len(valid_seats) >= 5:
+        discount = timing_total * 0.15
+        timing_total -= discount
+        print("Bulk Discount:", int(discount))
+    else:
+        print("No Bulk Discount")
+
+    # Booking fee
+    booking_fee = 50 * len(valid_seats)
+    total_with_fee = timing_total + booking_fee
+    print("Booking Fee:", booking_fee)
+
+    # GST
+    tax = total_with_fee * 0.12
+    final_amount = total_with_fee + tax
+    print("GST:", int(tax))
+
+    # Round final amount
+    final_amount = round(final_amount)
+
+    print("Final Amount:", final_amount)
+
+    return {
+        "base_total": base_total,
+        "timing_adjustment": int(timing_total),
+        "discount": int(discount),
+        "tax": int(tax),
+        "final_amount": final_amount
+    }
+
+
+# Example call
+result = calculate_ticket_price(
+    ["VIP", "REGULAR", "VIP", "ECONOMY"],
+    "evening",
+    True
+)
+
+print("\nFinal Output:", result)
